@@ -127,7 +127,7 @@
   services.nfs.server = {
     enable = true;
     exports = ''
-      /export         *(rw,sync,no_subtree_check,root_squash)
+      /export/k8s         *(rw,sync,no_subtree_check,root_squash)
     '';
   };
 
