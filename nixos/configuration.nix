@@ -19,6 +19,30 @@
   virtualisation = {
     podman.enable = true;
     libvirtd.enable = true;
+
+    containerd = {
+    enable = true;
+    settings =
+      let
+        fullCNIPlugins = pkgs.buildEnv {
+          name = "full-cni";
+          paths = with pkgs;[
+            cni-plugins
+            cni-plugin-flannel
+          ];
+        };
+      in {
+        plugins."io.containerd.grpc.v1.cri".cni = {
+          bin_dir = "${fullCNIPlugins}/bin";
+          conf_dir = "/var/lib/rancher/k3s/agent/etc/cni/net.d/";
+        };
+        # Optionally set private registry credentials here instead of using /etc/rancher/k3s/registries.yaml
+        # plugins."io.containerd.grpc.v1.cri".registry.configs."registry.example.com".auth = {
+        #  username = "";
+        #  password = "";
+        # };
+      };
+  };
   };
 
   # dconf
@@ -92,7 +116,12 @@
     enable = true;
     role = "server";
     clusterInit = true;
+    extraFlags = toString [
+      "--container-runtime-endpoint unix:///run/containerd/containerd.sock"
+    ];
   };
+
+  systemd.services.k3s.path = [ pkgs.ipset ];
 
   services.nfs.server = {
     enable = true;
