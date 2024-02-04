@@ -83,6 +83,10 @@
     };
   };
 
+  services.vscode-server = {
+    enable = true;
+  };
+
   # bootloader
   boot = {
     tmp.cleanOnBoot = true;
