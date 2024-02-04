@@ -1,9 +1,7 @@
-{ config, pkgs, username, kubenix, ... }: {
-
+{ config, pkgs, username, ... }: {
   imports = [
     /etc/nixos/hardware-configuration.nix
     ./locale.nix
-    kubenix.modules.k8s
   ];
 
   # nix
@@ -36,6 +34,7 @@
     kubectl
     consul
     terraform
+    helm
   ];
 
   # logind

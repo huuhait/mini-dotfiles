@@ -20,7 +20,6 @@
     nixosConfigurations."nixos" = nixpkgs.lib.nixosSystem {
       specialArgs = { inherit inputs username system; };
       modules = [
-        kubenix
         ./nixos/configuration.nix
       ];
     };
