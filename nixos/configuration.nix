@@ -34,7 +34,8 @@
     kubectl
     consul
     terraform
-    helm
+    kubernetes-helm
+    k3s
   ];
 
   # logind
@@ -85,6 +86,19 @@
 
   services.vscode-server = {
     enable = true;
+  };
+
+  services.k3s = {
+    enable = true;
+    role = "server";
+    clusterInit = true;
+  };
+
+  services.nfs.server = {
+    enable = true;
+    exports = ''
+      /export *(rw,no_subtree_check)
+    '';
   };
 
   # bootloader

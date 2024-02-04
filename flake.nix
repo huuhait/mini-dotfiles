@@ -4,8 +4,6 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
-    kubenix.url = "github:hall/kubenix";
-
     vscode-server.url = "github:nix-community/nixos-vscode-server";
   };
 
