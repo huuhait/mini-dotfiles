@@ -118,7 +118,7 @@
     clusterInit = true;
     extraFlags = toString [
       "--container-runtime-endpoint unix:///run/containerd/containerd.sock"
-      "--no-deploy traefik"
+      "--disable=traefik"
     ];
   };
 
