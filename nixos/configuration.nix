@@ -123,13 +123,6 @@
 
   systemd.services.k3s.path = [ pkgs.ipset ];
 
-  services.nfs.server = {
-    enable = true;
-    exports = ''
-      /export *(rw,no_subtree_check)
-    '';
-  };
-
   # bootloader
   boot = {
     tmp.cleanOnBoot = true;
